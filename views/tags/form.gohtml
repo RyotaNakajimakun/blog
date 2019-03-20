@@ -1,0 +1,34 @@
+{{define "tags/form"}}
+{{template "header" .}}
+{{template "dashboard/navbar" .}}
+<div class="container">
+  <div class="row">
+    {{template "dashboard/sidebar" .}}
+    <div class="col-sm-9" role="main">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <form class="form-horizontal" method="post">
+          <fieldset>
+            <legend>{{.Title}}</legend>
+            {{range .Flash}}
+              <div class="alert alert-danger">{{.}}</div><p>
+            {{end}}
+            <input type="hidden" name="_csrf" value="{{.Csrf}}">
+            <div class="form-group">
+              <label class="control-label" for="title">Title</label>
+              <input id="title" name="title" value="{{.Tag.Title}}" class="form-control" required="">
+            </div>
+
+            <div class="form-group">
+              <input type="submit" class="btn btn-primary" value="Submit">
+              <a class="btn btn-secondary" href="/admin/tags">Cancel</a>
+            </div>
+          </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{template "footer" .}}
+{{end}}

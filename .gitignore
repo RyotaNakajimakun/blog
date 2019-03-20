@@ -1,0 +1,6 @@
+config/config.json
+node_modules
+git_save
+ginblog
+*.rice-box.go
+tmp

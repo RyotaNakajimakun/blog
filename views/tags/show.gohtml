@@ -1,0 +1,16 @@
+{{define "tags/show"}}
+{{template "header" .}}
+{{template "navbar" .}}
+<div class="container" role="main">
+  {{template "sidebar" .}}
+  <div id="main-column">
+    <h2><i class="fa fa-tags mr-1"></i>{{.Tag.Title}}</h2>
+    {{range .Tag.Posts}}
+      <h3><a href="/posts/{{.ID}}">{{.Title}}</a></h3>
+      {{template "posts/post-info" .}}
+      <div class="excerpt">{{.Excerpt}}</div>
+    {{end}}
+  </div>
+</div>
+{{template "footer" .}}
+{{end}}
