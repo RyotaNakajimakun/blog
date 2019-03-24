@@ -15,7 +15,7 @@ debug:
 	@reflex -c reflex.conf
 
 run: build
-	./ginblog
+	./blog && cp ./blog ./tmp/blog
 
 test:
 	@go test ./...
@@ -24,4 +24,4 @@ vet:
 	@go vet ./...
 
 clean:
-	rm ./ginblog
+	rm ./blog

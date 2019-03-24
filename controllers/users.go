@@ -15,7 +15,7 @@ func UserIndex(c *gin.Context) {
 	var users []models.User
 	db.Find(&users)
 	h := DefaultH(c)
-	h["Title"] = "List of users"
+	h["Title"] = "ユーザー一覧"
 	h["Users"] = users
 	c.HTML(http.StatusOK, "users/index", h)
 }
@@ -23,7 +23,7 @@ func UserIndex(c *gin.Context) {
 //UserNew handles GET /admin/new_user route
 func UserNew(c *gin.Context) {
 	h := DefaultH(c)
-	h["Title"] = "New user"
+	h["Title"] = "ユーザー作成"
 	session := sessions.Default(c)
 	h["Flash"] = session.Flashes()
 	session.Save()
@@ -62,7 +62,7 @@ func UserEdit(c *gin.Context) {
 		return
 	}
 	h := DefaultH(c)
-	h["Title"] = "Edit user"
+	h["Title"] = "ユーザー編集"
 	h["User"] = user
 	session := sessions.Default(c)
 	h["Flash"] = session.Flashes()

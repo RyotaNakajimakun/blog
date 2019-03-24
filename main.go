@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
+	"github.com/RyotaNakajimakun/blog/controllers/admin"
 	"net/http"
 
-	"github.com/Sirupsen/logrus"
-	"github.com/claudiu/gocron"
 	"github.com/RyotaNakajimakun/blog/controllers"
 	"github.com/RyotaNakajimakun/blog/models"
 	"github.com/RyotaNakajimakun/blog/system"
+	"github.com/Sirupsen/logrus"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/memstore"
 	"github.com/gin-gonic/gin"
@@ -23,8 +23,9 @@ func main() {
 	system.LoadTemplates()
 
 	//Periodic tasks
-	gocron.Every(1).Day().Do(system.CreateXMLSitemap)
-	gocron.Start()
+	//のちに実装
+	//gocron.Every(1).Day().Do(system.CreateXMLSitemap)
+	//gocron.Start()
 
 	// Creates a gin router with default middleware:
 	// logger and recovery (crash-free) middleware
@@ -75,7 +76,7 @@ func main() {
 	authorized := router.Group("/admin")
 	authorized.Use(controllers.AuthRequired())
 	{
-		authorized.GET("/", controllers.AdminGet)
+		authorized.GET("/", admin.Show)
 
 		authorized.POST("/upload", controllers.UploadPost) //image upload
 

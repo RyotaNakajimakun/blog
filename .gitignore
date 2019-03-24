@@ -4,3 +4,5 @@ git_save
 ginblog
 *.rice-box.go
 tmp
+package-lock.json
+

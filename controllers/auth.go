@@ -17,7 +17,7 @@ import (
 //SignInGet handles GET /signin route
 func SignInGet(c *gin.Context) {
 	h := DefaultH(c)
-	h["Title"] = "Basic GIN web-site signin form"
+	h["Title"] = "ログインフォーム"
 	session := sessions.Default(c)
 	h["Flash"] = session.Flashes()
 	session.Save()
@@ -56,7 +56,7 @@ func SignInPost(c *gin.Context) {
 //SignUpGet handles GET /signup route
 func SignUpGet(c *gin.Context) {
 	h := DefaultH(c)
-	h["Title"] = "Basic GIN web-site signup form"
+	h["Title"] = "アカウント作成フォーム"
 	session := sessions.Default(c)
 	h["Flash"] = session.Flashes()
 	session.Save()

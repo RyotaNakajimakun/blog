@@ -1,12 +1,11 @@
 package controllers
 
 import (
-	"net/http"
-
-	"github.com/Sirupsen/logrus"
 	"github.com/RyotaNakajimakun/blog/models"
+	"github.com/Sirupsen/logrus"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 //PageGet handles GET /pages/:id route
@@ -30,7 +29,7 @@ func PageIndex(c *gin.Context) {
 	var pages []models.Page
 	db.Find(&pages)
 	h := DefaultH(c)
-	h["Title"] = "List of pages"
+	h["Title"] = "ページ一覧"
 	h["Pages"] = pages
 	c.HTML(http.StatusOK, "pages/index", h)
 }
@@ -38,7 +37,7 @@ func PageIndex(c *gin.Context) {
 //PageNew handles GET /admin/new_page route
 func PageNew(c *gin.Context) {
 	h := DefaultH(c)
-	h["Title"] = "New page"
+	h["Title"] = "新規ページ"
 	session := sessions.Default(c)
 	h["Flash"] = session.Flashes()
 	session.Save()
@@ -76,7 +75,7 @@ func PageEdit(c *gin.Context) {
 		return
 	}
 	h := DefaultH(c)
-	h["Title"] = "Edit page"
+	h["Title"] = "ページ編集"
 	h["Page"] = page
 	session := sessions.Default(c)
 	h["Flash"] = session.Flashes()

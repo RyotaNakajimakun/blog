@@ -1,0 +1,40 @@
+{{define "tags/index"}}
+{{template "header" .}}
+{{template "admin/dashboard/navbar" .}}
+<div class="container">
+  <div class="row">
+    {{template "admin/dashboard/sidebar" .}}
+    <div class="col-sm-9" role="main">
+      <h2>{{.Title}}</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>タイトル</th>
+            <th class="shrink">関連数</th>
+            <th class="shrink">編集</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range .Tags}}
+            <tr>
+              <td>{{.Title}}</td>
+              <td class="shrink">{{len .Posts}}</td>
+              <td class="shrink">
+                <a href="/tags/{{.Title}}" class="btn btn-sm btn-secondary"><span class="fa fa-eye"></span></a>
+                <form class="inline-block" action="/admin/tags/{{.Title}}/delete" method="post">
+                  <input type="hidden" name="_csrf" value="{{$.Csrf}}">
+                  <button type="button" class="btn btn-sm btn-danger" onclick="((confirm('Are you sure')) ? this.form.submit() : null);"><span class="fa fa-times"></span></button>
+                </form>
+              </td>
+            </tr>
+          {{end}}
+        </tbody>
+      </table>
+      <div class="actions">
+        <a href="/admin/new_tag" class="btn btn-primary">新規タグ</a>
+      </div>
+    </div>
+  </div>
+</div>
+{{template "footer" .}}
+{{end}}

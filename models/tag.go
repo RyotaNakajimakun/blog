@@ -4,6 +4,8 @@ import "time"
 
 //Tag struct contains post tag info
 type Tag struct {
+	Model
+
 	CreatedAt time.Time
 	UpdatedAt time.Time
 

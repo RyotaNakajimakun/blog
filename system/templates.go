@@ -211,3 +211,7 @@ func oauthUserName(c *gin.Context) string {
 	}
 	return name.(string)
 }
+
+func sample(aa int) int{
+	return aa
+}

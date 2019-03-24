@@ -31,7 +31,7 @@ func CommentIndex(c *gin.Context) {
 	var comments []models.Comment
 	db.Find(&comments)
 	h := DefaultH(c)
-	h["Title"] = "List of comments"
+	h["Title"] = "コメント一覧"
 	h["Comments"] = comments
 	c.HTML(http.StatusOK, "comments/index", h)
 }
@@ -39,7 +39,7 @@ func CommentIndex(c *gin.Context) {
 //CommentNew handles GET /admin/new_comment route
 func CommentNew(c *gin.Context) {
 	h := DefaultH(c)
-	h["Title"] = "New comment"
+	h["Title"] = "新規コメント"
 	session := sessions.Default(c)
 	h["Flash"] = session.Flashes()
 	session.Save()

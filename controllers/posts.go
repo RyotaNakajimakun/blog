@@ -38,7 +38,7 @@ func PostIndex(c *gin.Context) {
 	var posts []models.Post
 	db.Preload("Tags").Find(&posts)
 	h := DefaultH(c)
-	h["Title"] = "List of blog posts"
+	h["Title"] = "投稿一覧"
 	h["Posts"] = posts
 	c.HTML(http.StatusOK, "posts/index", h)
 }
@@ -49,7 +49,7 @@ func PostNew(c *gin.Context) {
 	db := models.GetDB()
 	db.Order("title asc").Find(&tags)
 	h := DefaultH(c)
-	h["Title"] = "New post"
+	h["Title"] = "新規投稿"
 	h["Tags"] = tags
 	session := sessions.Default(c)
 	h["Flash"] = session.Flashes()
@@ -96,7 +96,7 @@ func PostEdit(c *gin.Context) {
 		return
 	}
 	h := DefaultH(c)
-	h["Title"] = "Edit post entry"
+	h["Title"] = "投稿済コンテンツ編集"
 	h["Post"] = post
 	h["Tags"] = post.Tags
 	session := sessions.Default(c)

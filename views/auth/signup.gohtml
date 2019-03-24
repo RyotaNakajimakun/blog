@@ -5,30 +5,31 @@
   <div class="card auth-card">
     <div class="card-body">
       <form method="post" data-parsley-validate>
-        <h4 class="card-title">Sign Up</h4>
+        <h4 class="card-title">サインアップ</h4>
         {{range .Flash}}
           <div class="alert alert-danger">{{.}}</div><p>
         {{end}}
         <input type="hidden" name="_csrf" value="{{.Csrf}}">
 
         <div class="form-group">
-          <label class="control-label" for="name">Name</label>
-          <input id="name" name="name" placeholder="Your name" class="form-control input-md" required="" data-parsley-required-message="Please enter your name">
+          <label class="control-label" for="name">名前</label>
+          <input id="name" name="name" placeholder="Your name" class="form-control input-md" required="" data-parsley-required-message="名前を入力してください。">
         </div>
         
         <div class="form-group">
-          <label class="control-label" for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="Email address" class="form-control input-md" required="" data-parsley-required-message="Please enter your email">
+          <label class="control-label" for="email">メールアドレス</label>
+          <input id="email" name="email" type="email" placeholder="Email address" class="form-control input-md" required="" data-parsley-required-message="メールアドレス入力してください。">
         </div>
 
         <div class="form-group">
-          <label class="control-label" for="password">Password</label>
-          <input id="password" name="password" type="password" placeholder="Password" class="form-control input-md" required="" data-parsley-required-message="Please enter your password">
+          <label class="control-label" for="password">パスワード</label>
+          <input id="password" name="password" type="password" placeholder="Password" class="form-control input-md" required="" data-parsley-required-message="パスワードを入力してください。">
         </div>
 
         <div class="form-group">
-          <label class="control-label" for="passwordrepeat">Repeat password</label>
-          <input id="passwordrepeat" name="passwordrepeat" type="password" placeholder="Repeat password" class="form-control input-md" required="" data-parsley-required-message="Please repeat your password" data-parsley-equalto="#password" data-parsley-equalto-message="Passwords do not match">
+          <label class="control-label" for="passwordrepeat">パスワード（再確認）</label>
+          <input id="passwordrepeat" name="passwordrepeat" type="password" placeholder="Repeat password" class="form-control input-md" required="" data-parsley-required-message="パスワードを入力してください。"
+                 data-parsley-equalto="#password" data-parsley-equalto-message="パスワードが一致しません。">
         </div>
 
         <div class="form-group">
@@ -38,7 +39,7 @@
           </label>
         </div>
 
-        <button id="signup" name="signup" class="btn btn-primary">Sign Up</button>
+        <button id="signup" name="signup" class="btn btn-primary">サインアップ</button>
       </form>
     </div>
   </div>

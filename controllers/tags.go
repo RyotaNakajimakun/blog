@@ -30,7 +30,7 @@ func TagIndex(c *gin.Context) {
 	var tags []models.Tag
 	db.Preload("Posts").Order("title asc").Find(&tags)
 	h := DefaultH(c)
-	h["Title"] = "List of tags"
+	h["Title"] = "タグ一覧"
 	h["Tags"] = tags
 	c.HTML(http.StatusOK, "tags/index", h)
 }
@@ -38,7 +38,7 @@ func TagIndex(c *gin.Context) {
 //TagNew handles GET /admin/new_tag route
 func TagNew(c *gin.Context) {
 	h := DefaultH(c)
-	h["Title"] = "New tag"
+	h["Title"] = "タグ作成"
 	session := sessions.Default(c)
 	h["Flash"] = session.Flashes()
 	session.Save()
