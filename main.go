@@ -23,7 +23,7 @@ func main() {
 	system.LoadTemplates()
 
 	//Periodic tasks
-	//のちに実装
+	//サイトマップはのちに実装
 	//gocron.Every(1).Day().Do(system.CreateXMLSitemap)
 	//gocron.Start()
 
