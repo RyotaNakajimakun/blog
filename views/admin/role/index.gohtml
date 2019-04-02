@@ -1,0 +1,40 @@
+{{define "role/index"}}
+    {{template "header" .}}
+    {{template "admin/dashboard/navbar" .}}
+    <div class="container">
+        <div class="row">
+            {{template "admin/dashboard/sidebar" .}}
+            <div class="col-sm-9" role="main">
+                <h2>{{.Title}}</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="shrink">RoleName</th>
+                        <th class="shrink">DisplayName</th>
+                        <th class="shrink">Detail</th>
+                        <th class="shrink">管理</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{range .Roles}}
+                        <tr>
+                            <td class="shrink">{{.Name}}</td>
+                            <td class="shrink">{{.DisplayName}}</td>
+                            <td class="shrink">{{.Detail}}</td>
+                            <td class="shrink">
+                                <a href="/admin/role/{{.Name}}/detail" class="btn btn-sm btn-secondary"><span class="fa fa-eye"></span></a>
+                                <a href="/admin/role/{{.Name}}/edit" class="btn btn-sm btn-primary"><span class="fa fa-pencil-alt"></span></a>
+                            </td>
+                        </tr>
+                    {{end}}
+                    </tbody>
+                </table>
+                <div class="actions">
+                    <a href="/admin/new_role" class="btn btn-primary">ロールの追加</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{template "footer" .}}
+{{end}}
+

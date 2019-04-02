@@ -112,6 +112,13 @@ func main() {
 		authorized.GET("/new_tag", controllers.TagNew)
 		authorized.POST("/new_tag", controllers.TagCreate)
 		authorized.POST("/tags/:title/delete", controllers.TagDelete)
+
+		authorized.GET("/role", admin.RoleIndex)
+		authorized.GET("/new_role", admin.RoleNew)
+		authorized.POST("/new_role", admin.RoleCreate)
+		authorized.GET("/role/:name/detail", admin.RoleDetail)
+		authorized.GET("/role/:name/edit", admin.RoleEdit)
+
 	}
 
 	// Listen and server on 0.0.0.0:8080

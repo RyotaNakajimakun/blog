@@ -21,7 +21,7 @@ type Register struct {
 type User struct {
 	Model
 
-	Email    string `form:"email" binding:"required"`
+	Email    string `form:"email" binding:"required" gorm:"unique"`
 	Name     string `form:"name"`
 	Password string `form:"password" binding:"required"`
 }

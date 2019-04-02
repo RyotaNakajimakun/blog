@@ -1,17 +1,16 @@
 package models
 
-
 type Role struct {
-	ID          int    `gorm:primary_key`
-	Name        string `gorm:unique`
-	DisplayName string `gorm:"not null"`
-	Datail      string `gorm:"not null"`
-	HasPermission []Permission `gorm:"many2many:permisson_role;"`
+	ID            int          `gorm:"primary_key"`
+	Name          string       `form:"name" binding:"required" gorm:"unique"`
+	DisplayName   string       `form:"display_name" binding:"required" gorm:"not null"`
+	Detail        string       `form:"detail" binding:"required" gorm:"not null"`
+	HasPermission []Permission `gorm:"many2many:role_permission;"`
 }
 
 type Permission struct {
-	ID          int    `gorm:"primary_key"`
-	Name        string `gorm:"unique; not null"`
-	DisplayName string `gorm:"not null"`
-	Datail      string `gorm:"dafault:null"`
+	ID          int    `form:"id" gorm:"primary_key"`
+	Name        string `form:"name" gorm:"unique; not null"`
+	DisplayName string `form:"display_name" gorm:"not null"`
+	Detail      string `form:"detail" gorm:"default:null"`
 }
