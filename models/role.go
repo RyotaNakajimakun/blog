@@ -14,3 +14,22 @@ type Permission struct {
 	DisplayName string `form:"display_name" gorm:"not null"`
 	Detail      string `form:"detail" gorm:"default:null"`
 }
+
+func NewRole(name string, displayName string, detail string) Role {
+	role := Role{
+		Name:        name,
+		DisplayName: displayName,
+		Detail:      detail,
+	}
+	return role
+}
+
+func NewPermission(name string, displayName string, detail string) Permission {
+	permission := Permission{
+		Name:        name,
+		DisplayName: displayName,
+		Detail:      detail,
+	}
+	return permission
+}
+
