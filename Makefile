@@ -30,4 +30,8 @@ migration:
 	touch ./system/migration/`date '+%Y%m%d%H%I%s'`migration.go
 
 psqlstart:
-	postgres -D /usr/local/var/postgres &
+	postgres -D /usr/local/var/postgres &&
+
+fresh:
+	make build && mv blog tmp/blog && fresh
+
