@@ -1,9 +1,11 @@
 package seeds
 
-import "github.com/RyotaNakajimakun/blog/models"
+import (
+	"github.com/RyotaNakajimakun/blog/models"
+)
 
-func AddRole() []interface{} {
-	var roles []interface{}
+func AddRole() []models.Role {
+	var roles []models.Role
 
 	roles = append(roles, models.NewRole("development", "開発者用ロール", "全ての権限を所持"))
 	roles = append(roles, models.NewRole("admin", "管理者用ロール", "管理用権限を所持"))

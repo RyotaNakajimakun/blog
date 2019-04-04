@@ -1,24 +1,25 @@
 package main
 
 import (
-	"flag"
+	"github.com/RyotaNakajimakun/blog/database/migration"
 	"github.com/RyotaNakajimakun/blog/database/seeds"
 	"github.com/k0kubun/pp"
 )
 
 func main() {
-	flag.Parse()
-	functionNames := flag.Args()
-	pp.Print(functionNames)
-	var record []interface{}
-	for i := 0; i < len(functionNames); i++ {
-		switch functionNames[i] {
-		case "AddPermission":
-			record = seeds.AddPermissions()
-		case "AddRole":
-			record = seeds.AddRole()
-		}
+	db := migration.InitDatabase()
+
+	permissions := seeds.AddPermissions()
+	for i := 0; i < len(permissions); i++ {
+		pp.Print(permissions[i])
+		db.Create(&permissions[i])
+		db.NewRecord(permissions[i])
 	}
-	pp.Print(record)
-	seeds.CreateNewRecord(record)
+
+	roles := seeds.AddRole()
+	for i := 0; i < len(roles); i++ {
+		pp.Print(roles[i])
+		db.Create(&roles[i])
+		db.NewRecord(roles[i])
+	}
 }
