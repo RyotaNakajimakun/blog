@@ -24,6 +24,7 @@ type User struct {
 	Email    string `form:"email" binding:"required" gorm:"unique"`
 	Name     string `form:"name"`
 	Password string `form:"password" binding:"required"`
+	Role     Role `gorm:""`
 }
 
 //BeforeSave gorm hook

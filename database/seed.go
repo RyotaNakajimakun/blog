@@ -1,4 +1,4 @@
-package main
+package database
 
 import (
 	"github.com/RyotaNakajimakun/blog/database/migration"
@@ -6,7 +6,7 @@ import (
 	"github.com/k0kubun/pp"
 )
 
-func main() {
+func adders() {
 	db := migration.InitDatabase()
 
 	permissions := seeds.AddPermissions()
