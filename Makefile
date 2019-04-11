@@ -33,5 +33,5 @@ psqlstart:
 	nohup postgres -D /usr/local/var/postgres &
 
 fresh: vet
-	go build && mv blog tmp/blog && fresh
+	go build && rm tmp/blog && mv blog tmp/blog && fresh
 

@@ -1,7 +1,6 @@
 package admin
 
 import (
-	"fmt"
 	"github.com/RyotaNakajimakun/blog/controllers"
 	"github.com/RyotaNakajimakun/blog/models"
 	"github.com/Sirupsen/logrus"
@@ -48,21 +47,40 @@ func RoleCreate(c *gin.Context) {
 }
 
 func RoleDetail(c *gin.Context) {
-	db := models.GetDB()
-	role := models.Role{}
+	var role models.Role
 	var permissions []models.Permission
+
+	db := models.GetDB()
 	db.Where("name = ?", c.Param("name")).First(&role)
+	db.Model(&role).Related(&role.HasPermission, "HasPermission")
+	db.Find(&permissions)
 
-	db.Model(&role).Related(&permissions, "HasPermission")
+	hasPermission := make([]bool, len(permissions))
 
-	fmt.Print(permissions)
-	fmt.Print(role)
+	for i := 0; i < len(role.HasPermission); i++ {
+		var hasPerId int = role.HasPermission[i].ID -1
+		hasPermission[hasPerId] = true
+	}
+
 
 	h := controllers.DefaultH(c)
+	h["Title"] = "権限詳細"
+	h["Permissions"] = permissions
+	h["HasPermission"] = hasPermission
 	c.HTML(http.StatusOK, "role/detail", h)
 }
 
 func RoleEdit(c *gin.Context) {
+	var permissions []models.Permission
+	db := models.GetDB()
+	db.Find(&permissions)
+
 	h := controllers.DefaultH(c)
+	h["Title"] = "権限編集"
+	h["Permissions"] = permissions
 	c.HTML(http.StatusOK, "role/edit", h)
+}
+
+func ChangePermission(c *gin.Context) {
+
 }

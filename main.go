@@ -118,6 +118,7 @@ func main() {
 		authorized.POST("/new_role", admin.RoleCreate)
 		authorized.GET("/role/:name/detail", admin.RoleDetail)
 		authorized.GET("/role/:name/edit", admin.RoleEdit)
+		authorized.POST("/role/:name/edit", admin.RoleEdit)
 
 	}
 

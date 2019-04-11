@@ -6,6 +6,26 @@
             {{template "admin/dashboard/sidebar" .}}
             <div class="col-sm-9" role="main">
                 <h2>{{.Title}}</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="shrink">PermissionName</th>
+                        <th class="shrink">DisplayName</th>
+                        <th class="shrink">Detail</th>
+                        <th class="shrink">HasPermission</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{range .Permissions HasPermission}}
+                        <tr>
+                            <td class="shrink">{{.Name}}</td>
+                            <td class="shrink">{{.DisplayName}}</td>
+                            <td class="shrink">{{.Detail}}</td>
+                            <td class="shrink">{{.HasPermission}}</td>
+                        </tr>
+                    {{end}}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
