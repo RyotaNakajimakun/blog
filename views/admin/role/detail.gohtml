@@ -16,12 +16,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{range .Permissions HasPermission}}
+                    {{range .HasPermissions}}
                         <tr>
                             <td class="shrink">{{.Name}}</td>
                             <td class="shrink">{{.DisplayName}}</td>
                             <td class="shrink">{{.Detail}}</td>
-                            <td class="shrink">{{.HasPermission}}</td>
+                            {{if .Check}}
+                                <td class="shrink">●</td>
+                            {{else}}
+                                <td class="shrink">✖︎</td>
+                            {{end}}
                         </tr>
                     {{end}}
                     </tbody>

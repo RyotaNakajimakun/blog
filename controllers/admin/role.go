@@ -6,6 +6,7 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/k0kubun/pp"
 	"net/http"
 )
 
@@ -49,24 +50,36 @@ func RoleCreate(c *gin.Context) {
 func RoleDetail(c *gin.Context) {
 	var role models.Role
 	var permissions []models.Permission
+	type Permission struct {
+		models.Permission
+		Check bool
+	}
+	var HasPermissions []Permission
 
 	db := models.GetDB()
 	db.Where("name = ?", c.Param("name")).First(&role)
 	db.Model(&role).Related(&role.HasPermission, "HasPermission")
 	db.Find(&permissions)
 
-	hasPermission := make([]bool, len(permissions))
+	has := make([]bool, len(permissions))
 
-	for i := 0; i < len(role.HasPermission); i++ {
-		var hasPerId int = role.HasPermission[i].ID -1
-		hasPermission[hasPerId] = true
+	for i := range role.HasPermission {
+		var perId int = role.HasPermission[i].ID - 1
+		has[perId] = true
 	}
 
+	for i := range permissions {
+		HasPermissions = append(HasPermissions, Permission{})
+		HasPermissions[i].ID = permissions[i].ID
+		HasPermissions[i].Name = permissions[i].Detail
+		HasPermissions[i].DisplayName = permissions[i].DisplayName
+		HasPermissions[i].Detail = permissions[i].Detail
+		HasPermissions[i].Check = has[i]
+	}
 
 	h := controllers.DefaultH(c)
 	h["Title"] = "権限詳細"
-	h["Permissions"] = permissions
-	h["HasPermission"] = hasPermission
+	h["HasPermissions"] = HasPermissions
 	c.HTML(http.StatusOK, "role/detail", h)
 }
 
