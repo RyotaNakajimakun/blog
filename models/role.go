@@ -33,3 +33,35 @@ func NewPermission(name string, displayName string, detail string) Permission {
 	return permission
 }
 
+func HasPermission(name string) interface{} {
+	type PermissionCheck struct {
+		Permission
+		Check bool
+	}
+	var HasPermissions []PermissionCheck
+
+	var role Role
+	var permissions []Permission
+
+	db := GetDB()
+	db.Where("name = ?", name).First(&role)
+	db.Model(&role).Related(&role.HasPermission, "HasPermission")
+	db.Find(&permissions)
+
+	has := make([]bool, len(permissions))
+
+	for i := range role.HasPermission {
+		var perId int = role.HasPermission[i].ID - 1
+		has[perId] = true
+	}
+
+	for i := range permissions {
+		HasPermissions = append(HasPermissions, PermissionCheck{})
+		HasPermissions[i].ID = permissions[i].ID
+		HasPermissions[i].Name = permissions[i].Detail
+		HasPermissions[i].DisplayName = permissions[i].DisplayName
+		HasPermissions[i].Detail = permissions[i].Detail
+		HasPermissions[i].Check = has[i]
+	}
+	return HasPermissions
+}

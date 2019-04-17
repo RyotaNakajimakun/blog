@@ -6,26 +6,44 @@
             {{template "admin/dashboard/sidebar" .}}
             <div class="col-sm-9" role="main">
                 <h2>{{.Title}}</h2>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th class="shrink">PermissionName</th>
-                        <th class="shrink">DisplayName</th>
-                        <th class="shrink">Detail</th>
-                        <th class="shrink">Has</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{range .Permissions}}
+                <form method="post">
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td class="shrink">{{.Name}}</td>
-                            <td class="shrink">{{.DisplayName}}</td>
-                            <td class="shrink">{{.Detail}}</td>
-                            <td class="shrink">{{.}}</td>
+                            <th class="shrink">PermissionName</th>
+                            <th class="shrink">DisplayName</th>
+                            <th class="shrink">Detail</th>
+                            <th class="shrink">Has</th>
                         </tr>
-                    {{end}}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {{range .HasPermissions}}
+                            <tr>
+                                <td class="shrink">{{.Name}}</td>
+                                <td class="shrink">{{.DisplayName}}</td>
+                                <td class="shrink">{{.Detail}}</td>
+
+                                <td class="shrink">
+                                    <div class="btn-group btn-toggle">
+                                        {{if .Check}}
+                                            <input type="checkbox" name="ID" value="{{.ID}}" checked="checked">
+                                            <input type="hidden" name="hasChanged" value="True">
+                                        {{else}}
+                                            <input type="checkbox" name="ID" value="{{.ID}}">
+                                            <input type="hidden" name="hasChanged" value="False">
+                                        {{end}}
+                                    </div>
+                                </td>
+                            </tr>
+                        {{end}}
+                        </tbody>
+                    </table>
+                    <div class="form-group col-sm-12">
+                        <input type="hidden" name="_csrf" value="{{.Csrf}}">
+                        <input type="submit" class="btn btn-primary" value="変更">
+                        <a class="btn btn-secondary" href="/admin/role">キャンセル</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

@@ -48,34 +48,7 @@ func RoleCreate(c *gin.Context) {
 }
 
 func RoleDetail(c *gin.Context) {
-	var role models.Role
-	var permissions []models.Permission
-	type Permission struct {
-		models.Permission
-		Check bool
-	}
-	var HasPermissions []Permission
-
-	db := models.GetDB()
-	db.Where("name = ?", c.Param("name")).First(&role)
-	db.Model(&role).Related(&role.HasPermission, "HasPermission")
-	db.Find(&permissions)
-
-	has := make([]bool, len(permissions))
-
-	for i := range role.HasPermission {
-		var perId int = role.HasPermission[i].ID - 1
-		has[perId] = true
-	}
-
-	for i := range permissions {
-		HasPermissions = append(HasPermissions, Permission{})
-		HasPermissions[i].ID = permissions[i].ID
-		HasPermissions[i].Name = permissions[i].Detail
-		HasPermissions[i].DisplayName = permissions[i].DisplayName
-		HasPermissions[i].Detail = permissions[i].Detail
-		HasPermissions[i].Check = has[i]
-	}
+	HasPermissions := models.HasPermission(c.Param("name"))
 
 	h := controllers.DefaultH(c)
 	h["Title"] = "権限詳細"
@@ -84,16 +57,20 @@ func RoleDetail(c *gin.Context) {
 }
 
 func RoleEdit(c *gin.Context) {
-	var permissions []models.Permission
-	db := models.GetDB()
-	db.Find(&permissions)
+	HasPermissions := models.HasPermission(c.Param("name"))
 
 	h := controllers.DefaultH(c)
 	h["Title"] = "権限編集"
-	h["Permissions"] = permissions
+	h["HasPermissions"] = HasPermissions
 	c.HTML(http.StatusOK, "role/edit", h)
 }
 
 func ChangePermission(c *gin.Context) {
-
+	if perId, ok := c.GetPostFormArray("ID"); ok{
+		pp.Print(perId)
+	}
+	if Changed, ok := c.GetPostFormArray("hasChanged"); ok{
+		pp.Print(Changed)
+	}
+	c.Redirect(http.StatusOK, "admin/role/index")
 }
