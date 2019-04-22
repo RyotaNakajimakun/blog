@@ -39,7 +39,6 @@ func HasPermission(name string) interface{} {
 		Check bool
 	}
 	var HasPermissions []PermissionCheck
-
 	var role Role
 	var permissions []Permission
 
@@ -49,16 +48,15 @@ func HasPermission(name string) interface{} {
 	db.Find(&permissions)
 
 	has := make([]bool, len(permissions))
-
 	for i := range role.HasPermission {
-		var perId int = role.HasPermission[i].ID - 1
-		has[perId] = true
+		var permissionID int = role.HasPermission[i].ID - 1
+		has[permissionID] = true
 	}
 
 	for i := range permissions {
 		HasPermissions = append(HasPermissions, PermissionCheck{})
 		HasPermissions[i].ID = permissions[i].ID
-		HasPermissions[i].Name = permissions[i].Detail
+		HasPermissions[i].Name = permissions[i].Name
 		HasPermissions[i].DisplayName = permissions[i].DisplayName
 		HasPermissions[i].Detail = permissions[i].Detail
 		HasPermissions[i].Check = has[i]

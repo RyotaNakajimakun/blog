@@ -22,15 +22,13 @@
                                 <td class="shrink">{{.Name}}</td>
                                 <td class="shrink">{{.DisplayName}}</td>
                                 <td class="shrink">{{.Detail}}</td>
-
                                 <td class="shrink">
                                     <div class="btn-group btn-toggle">
                                         {{if .Check}}
-                                            <input type="checkbox" name="ID" value="{{.ID}}" checked="checked">
-                                            <input type="hidden" name="hasChanged" value="True">
+                                            <input type="checkbox" name="permissionID" value="{{.ID}}"
+                                                   checked="checked">
                                         {{else}}
-                                            <input type="checkbox" name="ID" value="{{.ID}}">
-                                            <input type="hidden" name="hasChanged" value="False">
+                                            <input type="checkbox" name="permissionID" value="{{.ID}}">
                                         {{end}}
                                     </div>
                                 </td>

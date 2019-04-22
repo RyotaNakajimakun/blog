@@ -6,7 +6,6 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"github.com/k0kubun/pp"
 	"net/http"
 )
 
@@ -66,11 +65,19 @@ func RoleEdit(c *gin.Context) {
 }
 
 func ChangePermission(c *gin.Context) {
-	if perId, ok := c.GetPostFormArray("ID"); ok{
-		pp.Print(perId)
+	db := models.GetDB()
+	role_name := c.Param("name")
+
+	Role := models.Role{}
+	db.Where("name = ?", role_name).First(&Role)
+
+	if perId, ok := c.GetPostFormArray("permissionID"); ok {
+		db.Model(&Role).Association("HasPermission").Clear()
+		for _, ID := range perId {
+			Permission := models.Permission{}
+			db.First(&Permission, ID)
+			db.Model(&Role).Association("HasPermission").Append(&Permission)
+		}
 	}
-	if Changed, ok := c.GetPostFormArray("hasChanged"); ok{
-		pp.Print(Changed)
-	}
-	c.Redirect(http.StatusOK, "admin/role/index")
+	c.Redirect(http.StatusMovedPermanently, "http://localhost:8080/admin/role")
 }
