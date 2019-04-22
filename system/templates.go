@@ -2,6 +2,7 @@ package system
 
 import (
 	"fmt"
+	"github.com/k0kubun/pp"
 	"html/template"
 	"os"
 	"path/filepath"
@@ -36,6 +37,7 @@ func LoadTemplates() {
 		"noescape":            noescape,
 		"postHasTag":          postHasTag,
 		"oauthUserName":       oauthUserName,
+		"oauthPermission":     oauthPermission,
 	})
 	fn := func(path string, f os.FileInfo, err error) error {
 		if f.IsDir() != true && strings.HasSuffix(f.Name(), ".gohtml") {
@@ -212,6 +214,8 @@ func oauthUserName(c *gin.Context) string {
 	return name.(string)
 }
 
-func sample(aa int) int{
-	return aa
+func oauthPermission(permissionName string, c *gin.Context) bool {
+	pp.Print(permissionName)
+
+	return false
 }
