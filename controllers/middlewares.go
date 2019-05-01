@@ -16,8 +16,7 @@ func ContextData() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		session := sessions.Default(c)
 		if uID := session.Get(userIDKey); uID != nil {
-			user := models.User{}
-			models.GetDB().First(&user, uID)
+			user := *models.InitializeUser(uID)
 			if user.ID != 0 {
 				c.Set("User", &user)
 			}
