@@ -1,4 +1,4 @@
-package database
+package main
 
 import (
 	"github.com/RyotaNakajimakun/blog/database/migration"
@@ -22,4 +22,8 @@ func adders() {
 		db.Create(&roles[i])
 		db.NewRecord(roles[i])
 	}
+}
+
+func main() {
+	adders()
 }

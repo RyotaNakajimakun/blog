@@ -2,7 +2,6 @@ package system
 
 import (
 	"fmt"
-	"github.com/k0kubun/pp"
 	"html/template"
 	"os"
 	"path/filepath"
@@ -214,8 +213,11 @@ func oauthUserName(c *gin.Context) string {
 	return name.(string)
 }
 
-func oauthPermission(permissionName string, c *gin.Context) bool {
-	pp.Print(permissionName)
-
+func oauthPermission(permission string, c *gin.Context) bool {
+	u, _ := c.Get("User")
+	if user, ok := u.(*models.User); ok {
+		authorized := authPermission(*user, permission)
+		return authorized
+	}
 	return false
 }
