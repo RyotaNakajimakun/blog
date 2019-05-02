@@ -6,8 +6,8 @@ import (
 	"os"
 	"path"
 
-	"log"
 	"io/ioutil"
+	"log"
 
 	"github.com/gin-gonic/gin"
 )

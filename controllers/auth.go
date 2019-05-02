@@ -7,8 +7,8 @@ import (
 
 	"strings"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/RyotaNakajimakun/blog/models"
+	"github.com/Sirupsen/logrus"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"

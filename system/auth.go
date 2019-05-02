@@ -4,7 +4,7 @@ import (
 	"github.com/RyotaNakajimakun/blog/models"
 )
 
-func authPermission(user models.User, authPermission string,) bool {
+func authPermission(user models.User, authPermission string) bool {
 	if ok := _UserHasPermission(user, authPermission); ok {
 		return true
 	}
