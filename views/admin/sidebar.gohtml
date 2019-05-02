@@ -29,12 +29,16 @@
     <li class="nav-item">
       <a class="nav-link {{isActiveLink .Context "/admin/pages"}}" href="/admin/pages"><i class="fa fa-copy mr-3"></i>ページ一覧</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link {{isActiveLink .Context "/admin/users"}}" href="/admin/users"><i class="fa fa-user mr-3"></i>ユーザー一覧</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link {{isActiveLink .Context "/admin/role"}}" href="/admin/role"><i class="fa fa-user mr-3"></i>ロール管理</a>
-    </li>
+    {{if oauthPermission "view.development_menu.all" $.Context}}
+      <li class="nav-item">
+        <a class="nav-link {{isActiveLink .Context "/admin/users"}}" href="/admin/users"><i class="fa fa-user mr-3"></i>ユーザー一覧</a>
+      </li>
+    {{end}}
+    {{if oauthPermission "view.development_menu.all" $.Context}}
+      <li class="nav-item">
+        <a class="nav-link {{isActiveLink .Context "/admin/role"}}" href="/admin/role"><i class="fa fa-user mr-3"></i>ロール管理</a>
+      </li>
+    {{end}}
   </ul>
 </aside>
 {{end}}

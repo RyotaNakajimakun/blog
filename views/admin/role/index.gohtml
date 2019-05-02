@@ -22,8 +22,14 @@
                             <td class="shrink">{{.DisplayName}}</td>
                             <td class="shrink">{{.Detail}}</td>
                             <td class="shrink">
-                                <a href="/admin/role/{{.Name}}/detail" class="btn btn-sm btn-secondary"><span class="fa fa-eye"></span></a>
-                                <a href="/admin/role/{{.Name}}/edit" class="btn btn-sm btn-primary"><span class="fa fa-pencil-alt"></span></a>
+                                {{if oauthPermission "view.development_menu.all" $.Context}}
+                                    <a href="/admin/role/{{.Name}}/detail" class="btn btn-sm btn-secondary"><span
+                                                class="fa fa-eye"></span></a>
+                                {{end}}
+                                {{if oauthPermission "edit.development_menu.all" $.Context}}
+                                    <a href="/admin/role/{{.Name}}/edit" class="btn btn-sm btn-primary"><span
+                                                class="fa fa-pencil-alt"></span></a>
+                                {{end}}
                             </td>
                         </tr>
                     {{end}}
