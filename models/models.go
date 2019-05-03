@@ -34,7 +34,7 @@ func GetDB() *gorm.DB {
 
 //AutoMigrate runs gorm auto migration
 func AutoMigrate() {
-	db.AutoMigrate(&User{}, &Tag{}, &Page{}, &Post{}, &Comment{}, &Role{}, &Permission{})
+	db.AutoMigrate(&User{}, &Tag{}, &Page{}, &Post{}, &Comment{}, &Role{}, &Permission{}, &Training{}, &Weight{})
 }
 
 //truncate truncates string to n runes
