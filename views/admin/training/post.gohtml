@@ -1,0 +1,99 @@
+{{define "training/post"}}
+    {{template "header" .}}
+    {{template "admin/dashboard/navbar" .}}
+    <div class="container">
+        <div class="row">
+            {{template "admin/dashboard/sidebar" .}}
+            <div class="col-sm-9" role="main">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form method="post" id="training_data">
+                            <fieldset>
+                                <legend>{{.Title}}</legend>
+                                {{range .Flash}}
+                                    <div class="alert alert-danger">{{.}}</div>
+                                {{end}}
+                                <input type="hidden" name="id" value="{{.Post.ID}}">
+                                <input type="hidden" name="_csrf" value="{{.Csrf}}">
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>トレーニング</legend>
+                                <label>トレーニングした日
+                                    <input type="date" name="training_day">
+                                </label>
+
+                                <label>開始時間
+                                    <input type="time" name="starting_time">
+                                </label>
+
+                                <label>終了時間
+                                    <input type="time" name="ending_time">
+                                </label>
+
+                                <label>ノート
+                                    <input type="text" name="note">
+                                </label>
+                            </fieldset>
+
+                            <input type="submit" class="btn-primary" value="記録">
+
+                            <fieldset class="exercises">
+                                <legend>1種目目</legend>
+                                <label>種目名
+                                    <input type="text" class="training_name" name="training_name">
+                                </label>
+
+                                <label>重量
+                                    <input type="number" class="weight" name="weight">
+                                </label>
+
+                                <label>レップ数
+                                    <input type="number" class="rep" name="rep">
+                                </label>
+
+                                <label>セット数
+                                    <input type="number" class="set" name="set">
+                                </label>
+
+                                <label>インターバル
+                                    <input type="number" class="interval" name="interval">
+                                </label>
+                                <div class="form-group">
+                                    <p class="control-label"><b>単位</b></p>
+                                    <div class="radio-inline">
+                                        <label for="kg">kg
+                                            <input type="radio" value="1" name="uint" class="kg">
+                                        </label>
+                                    </div>
+                                    <div class="radio-inline">
+                                        <label for="lb">lb
+                                            <input type="radio" value="2" name="uint" class="lb">
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                        <input type="button" class="btn-primary" id="add_exercise" value="種目追加">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let count             = 1;
+        let EXERCISE          = document.getElementsByClassName("exercises")[0].cloneNode(true);
+        let training          = document.getElementById("training_data");
+        let addExerciseButton = document.getElementById("add_exercise");
+
+        addExerciseButton.onclick = function () {
+            count++;
+            let exercise      = EXERCISE.cloneNode(true);
+            let trainingCount = String(count) + "種目目";
+
+            exercise.getElementsByTagName("legend")[0].innerHTML = trainingCount;
+            training.appendChild(exercise);
+        };
+    </script>
+    {{template "footer" .}}
+{{end}}
