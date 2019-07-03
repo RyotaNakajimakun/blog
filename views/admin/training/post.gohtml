@@ -59,16 +59,17 @@
                                 <label>インターバル
                                     <input type="number" class="interval" name="interval">
                                 </label>
+{{/*                                _@TODO: ループ処理で実装する予定. ラジオボタンに対して必須処理を追加or初期値を設定*/}}
                                 <div class="form-group">
                                     <p class="control-label"><b>単位</b></p>
                                     <div class="radio-inline">
                                         <label for="kg">kg
-                                            <input type="radio" value="1" name="uint" class="kg">
+                                            <input type="checkbox" value="1" name="uint" class="kg">
                                         </label>
                                     </div>
                                     <div class="radio-inline">
                                         <label for="lb">lb
-                                            <input type="radio" value="2" name="uint" class="lb">
+                                            <input type="checkbox" value="2" name="uint" class="lb">
                                         </label>
                                     </div>
                                 </div>
