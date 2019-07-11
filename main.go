@@ -87,6 +87,10 @@ func main() {
 		authorized.POST("/users/:id/edit", controllers.UserUpdate)
 		authorized.POST("/users/:id/delete", controllers.UserDelete)
 
+		authorized.GET("/training", controllers.TrainingIndex)
+		authorized.GET("/training/post", controllers.TrainingPost)
+		authorized.POST("/training/post", controllers.TrainingSave)
+
 		authorized.GET("/pages", controllers.PageIndex)
 		authorized.GET("/new_page", controllers.PageNew)
 		authorized.POST("/new_page", controllers.PageCreate)

@@ -39,7 +39,7 @@ func (u *User) BeforeSave() (err error) {
 	return
 }
 
-//WARNING:セキュリティ的にどうなのか検討が必要
+//_@WARNING セキュリティ的にどうなのか検討が必要
 func InitializeUser(uID interface{}) *User {
 	db := GetDB()
 	user := User{}
