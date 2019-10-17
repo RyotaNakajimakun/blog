@@ -30,7 +30,7 @@ migration:
 	touch ./system/migration/`date '+%Y%m%d%H%I%s'`migration.go
 
 psqlstart:
-	nohup postgres -D /usr/local/var/postgres &
+	docker run --name my-db -p 5432:5432 -e POSTGRES_USER=dev -e POSTGRES_PASSWORD=secret -d postgres:11.4
 
 fresh: vet
 	go build && rm tmp/blog && mv blog tmp/blog && fresh
