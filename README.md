@@ -1,3 +1,8 @@
+開発は一時停止
+===============
+
+
+
 GIN-powered blog boilerplate
 ===============
 
