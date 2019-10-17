@@ -91,6 +91,9 @@ func main() {
 		authorized.GET("/training/post", controllers.TrainingPost)
 		authorized.POST("/training/post", controllers.TrainingSave)
 
+		authorized.GET("/analysis", controllers.AnalysisIndex)
+		authorized.GET("/analysis/training", controllers.AnalysisMyTraining)
+
 		authorized.GET("/pages", controllers.PageIndex)
 		authorized.GET("/new_page", controllers.PageNew)
 		authorized.POST("/new_page", controllers.PageCreate)

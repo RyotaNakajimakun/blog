@@ -23,7 +23,7 @@ func TrainingPost(c *gin.Context) {
 	c.HTML(http.StatusOK, "training/post", h)
 }
 
-//@TODO Validationの処理を実装する必要がある
+//_@TODO Validationの処理を実装する必要がある
 func TrainingSave(c *gin.Context) {
 	var err error
 	var trainingData models.TrainingForm

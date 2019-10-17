@@ -15,3 +15,10 @@ func DefaultH(c *gin.Context) gin.H {
 		"Csrf":    csrf.GetToken(c),
 	}
 }
+func TrainingAnalysisH(c *gin.Context) gin.H {
+	return gin.H{
+		"Title": "",
+		"Context": c,
+		"Csrf": csrf.GetToken(c),
+	}
+}

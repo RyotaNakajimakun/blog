@@ -1,7 +1,6 @@
 package models
 
 import (
-	"github.com/k0kubun/pp"
 	"time"
 )
 
